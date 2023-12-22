@@ -15,8 +15,10 @@ public class Employee{
 
     }
 
-    public String getFirstName(){return this.firstName;}
+    public String getFirstName(){return firstName;}
     public String getLastName() {return lastName;}
+
+    public String getFulName() {return firstName + " " + lastName;}
     @Override
     public String toString(){
         return

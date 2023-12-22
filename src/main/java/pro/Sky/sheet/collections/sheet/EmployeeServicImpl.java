@@ -2,34 +2,31 @@ package pro.Sky.sheet.collections.sheet;
 
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class EmployeeServicImpl implements EmployeeServic {
 
-    private final List<Employee> employeeList;
+    private final Map<String, Employee> employees;
 
     public EmployeeServicImpl(){
-        this.employeeList = new ArrayList<>();
+        this.employees = new HashMap<>();
     }
     @Override
     public Employee add(String firstName, String lastNme) {
         Employee employee = new Employee(firstName, lastNme);
-        if(employeeList.contains(employee)){
+        if(employees.containsKey(employee.getFulName())){
             throw new EcxeptionRuntim();
         }
-        employeeList.add(employee);
+        employees.put(employee.getFulName(), employee);
         return employee;
     }
 
     @Override
     public Employee remove(String firstName, String lastNme) {
         Employee employee = new Employee(firstName, lastNme);
-        if(employeeList.contains(employee)){
-            employeeList.remove(employee);
+        if(employees.containsKey(employee.getFulName())){
+            return employees.remove(employee.getFulName());
         }
         throw  new Ecxeption();
     }
@@ -37,14 +34,14 @@ public class EmployeeServicImpl implements EmployeeServic {
     @Override
     public Employee find(String firstName, String lastNme) {
         Employee employee = new Employee(firstName, lastNme);
-        if(employeeList.contains(employee)){
-            return employee;
+        if(employees.containsKey(employee.getFulName())){
+            return employees.get(employee.getFulName());
         }
         throw  new Ecxeption();
     }
 
     @Override
     public Collection<Employee> findAll(){
-        return Collections.unmodifiableList(employeeList);
+        return Collections.unmodifiableCollection(employees.values());
     }
 }
