@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
-import java.util.Collections;
 
 
 @RestController
@@ -19,18 +18,21 @@ public class Conclusion {
         this.servic = servic;
     }
     @GetMapping("/add")
-    public Employee addEmployee(@RequestParam String firstName, @RequestParam String lastNme){
-        return servic.add(firstName, lastNme);
+    public Employee addEmployee(@RequestParam String firstName, @RequestParam String lastNme,
+                                @RequestParam Integer departament, @RequestParam Integer salary){
+        return servic.add(firstName, lastNme, departament, salary);
     }
 
-    @GetMapping("/add")
-    public Employee removeEmployee(@RequestParam String firstName, @RequestParam String lastNme){
-        return servic.remove(firstName, lastNme);
+    @GetMapping("/remove")
+    public Employee removeEmployee(@RequestParam String firstName, @RequestParam String lastNme,
+                                   @RequestParam Integer departament, @RequestParam Integer salary){
+        return servic.remove(firstName, lastNme, departament, salary);
     }
 
-    @GetMapping("/add")
-    public Employee findEmployee(@RequestParam String firstName, @RequestParam String lastNme){
-        return servic.find(firstName, lastNme);
+    @GetMapping("/find")
+    public Employee findEmployee(@RequestParam String firstName, @RequestParam String lastNme,
+                                 @RequestParam Integer departament, @RequestParam Integer salary){
+        return servic.find(firstName, lastNme, departament, salary);
     }
     @GetMapping
     public Collection<Employee> findAll(){

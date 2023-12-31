@@ -1,11 +1,12 @@
 package pro.Sky.sheet.collections.sheet;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.*;
 
 @Service
-public class EmployeeServicImpl implements EmployeeServic {
+public abstract class EmployeeServicImpl implements EmployeeServic {
 
     private final Map<String, Employee> employees;
 
@@ -13,8 +14,8 @@ public class EmployeeServicImpl implements EmployeeServic {
         this.employees = new HashMap<>();
     }
     @Override
-    public Employee add(String firstName, String lastNme) {
-        Employee employee = new Employee(firstName, lastNme);
+    public Employee add(String firstName, String lastNme, int departamentId, int salary) {
+        Employee employee = new Employee(firstName, lastNme, departamentId, salary);
         if(employees.containsKey(employee.getFulName())){
             throw new EcxeptionRuntim();
         }
@@ -23,8 +24,8 @@ public class EmployeeServicImpl implements EmployeeServic {
     }
 
     @Override
-    public Employee remove(String firstName, String lastNme) {
-        Employee employee = new Employee(firstName, lastNme);
+    public Employee remove(String firstName, String lastNme, int departamentId, int salary) {
+        Employee employee = new Employee(firstName, lastNme, departamentId, salary);
         if(employees.containsKey(employee.getFulName())){
             return employees.remove(employee.getFulName());
         }
@@ -32,16 +33,18 @@ public class EmployeeServicImpl implements EmployeeServic {
     }
 
     @Override
-    public Employee find(String firstName, String lastNme) {
-        Employee employee = new Employee(firstName, lastNme);
+    public Employee find(String firstName, String lastNme, int departamentId, int salary) {
+        Employee employee = new Employee(firstName, lastNme, departamentId, salary);
         if(employees.containsKey(employee.getFulName())){
             return employees.get(employee.getFulName());
         }
         throw  new Ecxeption();
     }
 
+
     @Override
     public Collection<Employee> findAll(){
         return Collections.unmodifiableCollection(employees.values());
     }
+
 }
