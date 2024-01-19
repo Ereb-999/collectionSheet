@@ -1,6 +1,10 @@
 package pro.Sky.sheet.collections.sheet;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Objects;
+
+import static org.apache.commons.lang3.StringUtils.*;
 
 public class Employee{
     private final String firstName;
@@ -11,8 +15,8 @@ public class Employee{
 
 
     public Employee(String firstName, String lastName, int departamentId, int salary){
-        this.lastName = lastName;
-        this.firstName =  firstName;
+        this.lastName = capitalize(lastName.toLowerCase());
+        this.firstName =  capitalize(firstName.toLowerCase());
         this.departamentId = departamentId;
         this.salary = salary;
 
