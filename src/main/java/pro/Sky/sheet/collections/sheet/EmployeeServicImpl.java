@@ -7,7 +7,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import java.util.*;
 
 @Service
-public abstract class EmployeeServicImpl implements EmployeeServic {
+public class EmployeeServicImpl implements EmployeeServic {
 
     private final Map<String, Employee> employees;
 
@@ -36,7 +36,7 @@ public abstract class EmployeeServicImpl implements EmployeeServic {
         if(employees.containsKey(employee.getFulName())){
             return employees.remove(employee.getFulName());
         }
-        throw  new Ecxeption();
+        throw new EmployeeNotFoundExeption();
     }
 
     @Override
@@ -44,18 +44,18 @@ public abstract class EmployeeServicImpl implements EmployeeServic {
         if (!validateInput(firstName, lastNme)){
             throw new InvalitEcxeption();
         }
-        Employee employee = new Employee(firstName, lastNme, departamentId, salary);
+        Employee employee = new Employee(firstName, lastNme,  departamentId, salary);
         if(employees.containsKey(employee.getFulName())){
             return employees.get(employee.getFulName());
         }
-        throw  new Ecxeption();
+        throw new EmployeeNotFoundExeption();
     }
-
 
     @Override
     public Collection<Employee> findAll(){
         return Collections.unmodifiableCollection(employees.values());
     }
+
 
     private boolean validateInput(String firstName, String lastNme){
         return StringUtils.isAlpha(firstName) && StringUtils.isAlpha(lastNme);
