@@ -7,27 +7,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/departments")
-public class DepartamentServicImpl {
+public class DepartmentController {
 
-    private final DepartamentServicVar departamentServicVar ;
+    private final DepartmentService departamentServicVar ;
 
-    public DepartamentServicImpl(DepartamentServicVar departamentServicVar) {
+    public DepartmentController(DepartmentService departamentServicVar) {
         this.departamentServicVar = departamentServicVar;
     }
 
     @GetMapping("/max-salary")
-    public Employee findEmployeeMaxSalaryDepartament(@RequestParam int departamentId){
+    public Employee findEmployeeMaxSalaryDepartament(@RequestParam Integer departamentId){
         return departamentServicVar.findEmployeeMaxSalaryDepartament(departamentId);
     }
 
     @GetMapping("/min-salary")
-    public Employee findEmployeeMinSalaryDepartament(@RequestParam int departamentId){
+    public Employee findEmployeeMinSalaryDepartament(@RequestParam Integer departamentId){
         return departamentServicVar.findEmployeeMinSalaryDepartament(departamentId);
     }
 
@@ -37,7 +36,7 @@ public class DepartamentServicImpl {
     }
 
     @GetMapping(path = "/all", params = "{departamentId}")
-    public Collection<Employee> findEmployee(@RequestParam int departamentId){
+    public Collection<Employee> findEmployee(@RequestParam Integer departamentId){
         return departamentServicVar.findEmployeeDepartamentNameLastName(departamentId);
     }
 

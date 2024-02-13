@@ -5,12 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 
-public interface DepartamentServicVar {
+public interface DepartmentService {
 
     Employee findEmployeeMaxSalaryDepartament(int departamentId);
     Employee findEmployeeMinSalaryDepartament(int departamentId);
     Map<Integer, List<Employee>> findEmployeeDepartamentNameLastName();
     Collection<Employee> findEmployeeDepartamentNameLastName(int departamentId);
 
-    List<String> flatMapTest();
 }
